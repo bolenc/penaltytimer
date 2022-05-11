@@ -27,7 +27,7 @@
   }
 </script>
 
-<input required type="text" class={Validate.errorClass(errors.duration, 'invalid', 'valid')} name="duration" bind:value={durationText}>
+<input required type="text" class={Validate.errorClass(errors.duration, 'invalid', 'valid')} pattern="[0-9]*:?[0-9]+" name="duration" bind:value={durationText}>
 
 <style>
   input.invalid {

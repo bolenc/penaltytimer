@@ -8,21 +8,28 @@
   export let params: Timer.TimerParams;
   const dispatch = createEventDispatcher();
 
-  params = Timer.init(params);
   $: timeRemainingText = Timer.toTimeString(params.timeRemaining);
   $: isExpired = params.timeRemaining <= 0 || params.state === Timer.TimerState.Stopped;
   $: isRunning = params.state === Timer.TimerState.Running;
+  params = Timer.init(params);
+
+  if (clock.isRunning) {
+    params = Timer.start(params);
+  }
 
   clock.addEventListener(Timer.TimerEvents.Tick, tick);
+  clock.addEventListener(Timer.TimerEvents.Start, start);
+  clock.addEventListener(Timer.TimerEvents.Pause, pause);
 
   onMount(async () => {
     log.debug(`onMount(${playerNumber}, ${params.timeRemaining}/${params.duration})`);
-    params = Timer.start(params);
   });
 
   onDestroy(() => {
     log.debug(`onDestroy(${playerNumber}, ${params.timeRemaining}/${params.duration})`);
     clock.removeEventListener(Timer.TimerEvents.Tick, tick);
+    clock.removeEventListener(Timer.TimerEvents.Start, start);
+    clock.removeEventListener(Timer.TimerEvents.Pause, pause);
   });
 
   afterUpdate(() => {
@@ -31,6 +38,14 @@
 
   function acknowledge() {
     dispatch('acknowledge', {playerNumber, params});
+  }
+
+  function pause() {
+    params = Timer.pause(params);
+  }
+
+  function start() {
+    params = Timer.start(params);
   }
 
   function tick() {
@@ -47,7 +62,7 @@
   }
 </script>
 
-<div class="main {isExpired ? 'expired' : 'active'}">
+<div class="main {params.state}">
   <div class="info">
     Player: {playerNumber}
     Time left: {timeRemainingText}
@@ -55,11 +70,11 @@
 
   <div class="controls">
     
-    {#if isRunning}
+    <!-- {#if isRunning}
     <button on:click={() => params = Timer.pause(params)}>&#x23F8;</button>
     {:else if !isExpired}
     <button on:click={() => params = Timer.start(params)}>&#x23F5;</button>
-    {/if}
+    {/if} -->
     
     {#if !isExpired}
     <button on:click={() => params = Timer.stop(params)}>&#x23F9;</button>
@@ -82,9 +97,14 @@
     display: flex;
     justify-content: center;
   }
-  div.expired {
+  div.stopped {
     border-style: solid;
     border-color: red;
     background-color: pink;
+  }
+  div.paused {
+    border-style: solid;
+    border-color: black;
+    background-color: lightgray;
   }
 </style>

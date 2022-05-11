@@ -8,7 +8,7 @@
   let isRunning = clock.isRunning;
 
   function pauseAll() {
-    clock.stop();
+    clock.pause();
     isRunning = clock.isRunning;
   }
   function startAll() {

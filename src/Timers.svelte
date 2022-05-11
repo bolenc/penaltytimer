@@ -25,8 +25,7 @@
       ...activeTimers,
       {
         playerNumber,
-        duration,
-        timeRemaining: duration
+        timerParams: {duration}
       }
     ];
   }
@@ -50,7 +49,7 @@
   <form on:submit|preventDefault={addTimer}>
     Player: <input required type="number" min=0 max=99 bind:value={playerNumber} placeholder="#" name="playerNumber">
     Duration: <TimeInput bind:duration={duration} bind:errors={errors} />
-    <button disabled={errorCount > 0}>Start</button>
+    <button disabled={errorCount > 0}>Add</button>
     
     {#each errorList as err}
     <p class="error">{err}</p>
@@ -62,12 +61,11 @@
       <TimerUI
         playerNumber={props.playerNumber}
         clock={clock}
-        bind:params={props}
+        bind:params={props.timerParams}
         on:acknowledge={onAcknowledge}>
       </TimerUI>
     {/each}
   </div>
-
 </div>
 
 <style>

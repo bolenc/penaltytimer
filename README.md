@@ -24,7 +24,6 @@ You can run the newly built app with `npm run start`. This uses [sirv](https://g
 
 ## Todo
 
-- [ ] Fix issue where timers down count when running in a mobile browser while the phone sleeps
+- [X] Fix issue where timers down count when running in a mobile browser while the phone sleeps
 - [ ] Get numeric keyboard for duration input
 - [ ] Ensure player number uniqueness
-
