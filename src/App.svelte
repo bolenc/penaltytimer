@@ -20,6 +20,7 @@
 
 <main>
 	<h1>Penalty Timer</h1>
+  <p>Warning: Timers can't go off on a mobile device if your screen goes to sleep</p>
   {#if isRunning}
   <button on:click={pauseAll}>Pause all &#x23F8;</button>
   {:else}
@@ -38,15 +39,15 @@
 <style>
 	main {
 		text-align: center;
-		padding: 1em;
-		max-width: 240px;
+		padding: 5px;
+		/* max-width: 240px; */
 		margin: 0 auto;
     /* display: grid; */
 	}
 
   #timers-box {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
   }
 
 	h1 {

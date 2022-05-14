@@ -5,6 +5,7 @@
 
   export let errors: Validate.Errors = {};
   export let duration: number;
+  export let id: string;
 
   let durationText: string;
 
@@ -27,7 +28,7 @@
   }
 </script>
 
-<input required type="text" class={Validate.errorClass(errors.duration, 'invalid', 'valid')} pattern="[0-9]*:?[0-9]+" name="duration" bind:value={durationText}>
+<input required type="text" id={id} class={Validate.errorClass(errors.duration, 'invalid', 'valid')} pattern="[0-9]*:?[0-9]+" name="duration" bind:value={durationText}>
 
 <style>
   input.invalid {

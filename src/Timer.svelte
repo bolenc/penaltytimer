@@ -64,8 +64,8 @@
 
 <div class="main {params.state}">
   <div class="info">
-    Player: {playerNumber}
-    Time left: {timeRemainingText}
+    <p>Player: {playerNumber}</p>
+    <p>Time left: {timeRemainingText}</p>
   </div>
 
   <div class="controls">
@@ -88,7 +88,7 @@
   div.main {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px;
     border-style:solid;
     border-width: 1px;
   }
@@ -96,6 +96,13 @@
   div.info {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+
+  div.info p {
+    margin-left: 2px;
+    margin-right: 2px;
+    /* padding: 0; */
   }
   div.stopped {
     border-style: solid;
@@ -106,5 +113,15 @@
     border-style: solid;
     border-color: black;
     background-color: lightgray;
+  }
+
+  div.controls {
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    padding: 1px;
+    margin: 1px;
   }
 </style>

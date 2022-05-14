@@ -47,8 +47,8 @@
 <div id="main">  
   <h2>{name}</h2>
   <form on:submit|preventDefault={addTimer}>
-    Player: <input required type="number" min=0 max=99 bind:value={playerNumber} placeholder="#" name="playerNumber">
-    Duration: <TimeInput bind:duration={duration} bind:errors={errors} />
+    <label>Player: <input required type="number" min=0 max=99 bind:value={playerNumber} placeholder="#" id="playerNumber" name="playerNumber"></label>
+    <label>Duration: <TimeInput id="duration" bind:duration={duration} bind:errors={errors} /></label>
     <button disabled={errorCount > 0}>Add</button>
     
     {#each errorList as err}
@@ -78,5 +78,10 @@
 
   input {
     max-width: 5em;
+  }
+
+  label {
+    display: inline;
+    padding: 4px;
   }
 </style>
